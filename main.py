@@ -5,15 +5,15 @@ def ParcelGen(width=100, height=100, number=10):
     parcels = []
     for location in range(number):
         parcels.append([randint(0, width), randint(0, height)])
-    
-    return(parcels)
+
+    return parcels
 
 
 def GraphGen(parcels):
     import numpy as np
     from math import sqrt
     graph = np.empty(shape=(len(parcels), len(parcels)))
-    
+
     for i in range(len(parcels)):
         row = []
         for j in range(len(parcels)):
