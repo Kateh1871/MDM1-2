@@ -1,5 +1,13 @@
 #! usr/bin/env python3
 
+"""
+TO DO LIST:
+    - display the graph and optimal route
+    - fix same distance bug
+    - calculate actual distance
+    - create density mappings for parcel locations(?)
+    
+"""
 
 class Graph:
     # stores all information about the parcels including coordinates
@@ -63,6 +71,7 @@ def Algorithm(parcels):
     # 0 is appended onto the end to mark going back to the depo
     visited.append(0)
     print(visited)
+    return visited
 
 
 parcels = Graph()
