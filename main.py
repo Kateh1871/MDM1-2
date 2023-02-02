@@ -2,7 +2,6 @@
 
 """
 TO DO LIST:
-    - display the graph and optimal route
     - fix same distance bug
     - calculate actual distance
     - create density mappings for parcel locations(?)
@@ -60,7 +59,6 @@ def Algorithm(parcels):
     current = 0
     for x in range(len(parcels.vertices) - 1):
         visited.append(current)
-        print(visited)
         distances = [parcels.matrix[current][y]
                      for y in range(0, len(parcels.matrix[current]))
                      if y not in visited]
@@ -70,11 +68,30 @@ def Algorithm(parcels):
 
     # 0 is appended onto the end to mark going back to the depo
     visited.append(0)
-    print(visited)
+
     return visited
+
+
+def DisplayPath(parcels, route, width=100, height=100):
+    import matplotlib.pyplot as plt
+
+    # seperates the list of coordinates into x only and y only for pyplot
+    # to plot correctly
+    routeX = [parcels.vertices[x][0] for x in route]
+    routeY = [parcels.vertices[y][1] for y in route]
+
+    display = plt.plot(routeX, routeY, "k", marker="+", mec="r")
+    plt.xlim(0, width*1.1)
+    plt.ylim(0, width*1.1)
+    plt.show()
+
+    # you dont have to do anything with the returned graph if all you want
+    # to do is see it in the plots tab
+    return display
 
 
 parcels = Graph()
 # print(parcels.vertices)
 # print(parcels.matrix)
-Algorithm(parcels)
+route = Algorithm(parcels)
+DisplayPath(parcels, route)
