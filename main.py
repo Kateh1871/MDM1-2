@@ -3,10 +3,13 @@
 """
 TO DO LIST:
     - fix same distance bug
-    - calculate actual distance
     - create density mappings for parcel locations(?)
-    
+    - generate sepertion distances, nodes generate with mix/max distance
+    - assume small parcels are on new path / negligibale distance
+    - command line arguments(?)
+
 """
+
 
 class Graph:
     # stores all information about the parcels including coordinates
@@ -52,6 +55,7 @@ def Algorithm(parcels):
     # matrixRow is the full row to properly index the new node
 
     # i actually have no idea if this is the shortest route im just hoping
+
     # if there are 2 nodes equal distance apart the program breaks, just
     # hope there are none next time and run it again
 
@@ -72,6 +76,17 @@ def Algorithm(parcels):
     return visited
 
 
+def PathDistance(parcels, route):
+    # calculates total length of delivery route
+
+    distance = 0
+    for vertex in range(len(route)-1, 1, -1):
+        distance += parcels.matrix[route[vertex-1]][route[vertex]]
+        print(route)
+
+    return distance
+
+
 def DisplayPath(parcels, route, width=100, height=100):
     import matplotlib.pyplot as plt
 
@@ -90,8 +105,12 @@ def DisplayPath(parcels, route, width=100, height=100):
     return display
 
 
-parcels = Graph()
+parcels = Graph(width=20, height=20, number=5)
 # print(parcels.vertices)
 # print(parcels.matrix)
 route = Algorithm(parcels)
-DisplayPath(parcels, route)
+# DisplayPath(parcels, route)
+PathDistance(parcels, route)
+print(parcels.vertices)
+
+matrix = parcels.matrix
