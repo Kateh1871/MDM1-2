@@ -2,11 +2,8 @@
 
 """
 TO DO LIST:
-    - fix same distance bug
-    - create density mappings for parcel locations(?)
-    - generate sepertion distances, nodes generate with mix/max distance
     - assume small parcels are on new path / negligibale distance
-    - command line arguments(?)
+    - generate parcels from distance instead of number
 
 """
 
@@ -56,16 +53,17 @@ def Algorithm(parcels):
 
     # i actually have no idea if this is the shortest route im just hoping
 
-    # if there are 2 nodes equal distance apart the program breaks, just
-    # hope there are none next time and run it again
-
     visited = []
     current = 0
     for x in range(len(parcels.vertices) - 1):
         visited.append(current)
+
+        # takes the row of the adjacency matrix corresponding to the current
+        # node only taking the columns of unvisited nodes
         distances = [parcels.matrix[current][y]
                      for y in range(0, len(parcels.matrix[current]))
                      if y not in visited]
+
         matrixRow = list(parcels.matrix[current])
         new = min(distances)
         current = matrixRow.index(new)
